@@ -4,8 +4,8 @@
 #
 #  id            :bigint           not null, primary key
 #  original_text :string           not null
-#  quantity      :float            not null
-#  unit          :string           not null
+#  quantity      :float
+#  unit          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  ingredient_id :bigint           not null
@@ -22,8 +22,8 @@
 #  fk_rails_...  (recipe_id => recipes.id)
 #
 class RecipeIngredient < ApplicationRecord
-  belongs_to :recipe
-  belongs_to :ingredient
+  belongs_to :recipe, inverse_of: :recipe_ingredients
+  belongs_to :ingredient, inverse_of: :recipe_ingredients
 
   validates :original_text, presence: true
   validates :quantity, presence: true

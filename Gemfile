@@ -53,6 +53,8 @@ gem "sassc-rails"
 
 gem "annotaterb"
 gem "pry-byebug"
+gem "ingreedy"
+gem "activerecord-import"
 
 group :development, :test do
   gem "dotenv-rails"

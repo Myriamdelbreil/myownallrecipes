@@ -4,8 +4,8 @@
 #
 #  id            :bigint           not null, primary key
 #  original_text :string           not null
-#  quantity      :float            not null
-#  unit          :string           not null
+#  quantity      :float
+#  unit          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  ingredient_id :bigint           not null

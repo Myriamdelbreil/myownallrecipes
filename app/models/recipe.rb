@@ -11,7 +11,7 @@
 #  title       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  category_id :bigint           not null
+#  category_id :bigint
 #
 # Indexes
 #
@@ -22,9 +22,9 @@
 #  fk_rails_...  (category_id => categories.id)
 #
 class Recipe < ApplicationRecord
-  belongs_to :category
+  belongs_to :category, optional: true
 
-  has_many :recipe_ingredients, dependent: :destroy
+  has_many :recipe_ingredients, dependent: :destroy,  inverse_of: :recipe
   has_many :ingredients, through: :recipe_ingredients
 
   validates :cook_time, presence: true
