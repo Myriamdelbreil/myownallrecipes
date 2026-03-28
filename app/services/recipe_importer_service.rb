@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'cgi'
 
 class RecipeImporterService
   def initialize
@@ -81,7 +82,7 @@ class RecipeImporterService
       cook_time: data['cook_time'],
       prep_time: data['prep_time'],
       ratings: data['ratings'],
-      image_url: data['image'],
+      image_url: clean_image_url(data['image']),
       cuisine: data['cuisine'],
       category: @categories[data['category']]
     )
@@ -105,5 +106,19 @@ class RecipeImporterService
     end
 
     recipe
+  end
+
+  def clean_image_url(raw_url)
+    return nil if raw_url.blank?
+
+    if raw_url.include?("meredithcorp.io") && raw_url.include?("url=")
+      parsed_query = CGI.parse(URI.parse(raw_url).query)
+
+      real_url = parsed_query["url"]&.first
+
+      return real_url if real_url.present?
+    end
+
+    raw_url
   end
 end
