@@ -9,8 +9,11 @@
 #
 # Indexes
 #
-#  index_ingredients_on_name  (name)
+#  index_ingredients_on_name  (name) UNIQUE
 #
 class Ingredient < ApplicationRecord
   validates :name, presence: true
+
+  has_many :recipe_ingredients, dependent: :destroy,  inverse_of: :ingredient
+  has_many :recipes, through: :recipe_ingredients
 end
