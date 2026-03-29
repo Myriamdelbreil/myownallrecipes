@@ -1,2 +1,70 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1506368249639-73a05d6f6488?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+  <div class="container">
+    <h1 class='text-center'>Find <strong>the best recipe</strong> for <strong>anything you crave</strong>!</h1>
+    <h2 class='text-white text-center'>(and what you still have in your cupboards)</h2>
+    <%= form_with url: recipes_path, method: :get do |f| %>
+      <div class="m-4 w-100 rounded-pill">
+        <div class='d-flex w-100 flex-grow gap-2'>
+          <%= hw_combobox_tag :ingredient_ids,
+            src: ingredients_path(format: :turbo_stream),
+            id: "ingredient-box",
+            name: "ingredient_ids[]",
+            multiselect_chip: true,
+            data: { hw_combobox_src_value: ingredients_path(format: :turbo_stream) },
+            input: {
+              class: "form-control border-0 w-100",
+              placeholder: "Ajoutez vos ingrédients..."
+            } %>
+          <%= f.submit "Find and cook", class: "btn btn-primary btn-lg rounded-pill" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <h1 class="text-center my-5">Find the simplest recipes</h1>
+
+  <% @recipes_per_category.each do |category, recipes| %>
+    <div class="category-group mb-5">
+      <h2 class="text-center mb-4"><%= category.name %></h2>
+
+      <div class="cards <%= 'few-cards' if recipes.size < 3 %>">
+        <% recipes.each do |recipe| %>
+          <%= link_to recipe_path(recipe), class: "card-recipe" do %>
+            <%= image_tag recipe.image_url, alt: recipe.title if recipe.image_url.present? %>
+
+            <div class="card-recipe-infos">
+              <div>
+                <h2><%= recipe.title %></h2>
+                <ul class="list-unstyled mb-0 mt-2">
+                  <% if recipe.ratings %>
+                    <li class="mb-1"><%= render_stars(recipe.ratings) %></li>
+                  <% end %>
+                  <li><i class="bi bi-stopwatch"></i> <%= recipe.formatted_prep_time %></li>
+                  <li>
+                    <i class="bi bi-basket"></i>
+                    <%= "#{@ingredients_counts_per_recipe[recipe.id] || 0} items" %>
+                  </li>
+                </ul>
+              </div>
+
+              <% if recipe.cuisine %>
+                <div class="badge bg-light text-dark border"><%= recipe.cuisine %></div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div> </div>
+  <% end %>
+</div>
+
+<hr>
+
+<div class="container my-4">
+  <h1 class="text-center">Still not sure ?</h1>
+  <div class="text-center d-flex justify-content-around my-4">
+    <%= link_to 'Browse recipes', recipes_path, class: 'btn btn-primary rounded-pill'  %>
+    <%= link_to 'Browse categories', categories_path, class: 'btn btn-primary rounded-pill'  %>
+  </div>
+</div>
