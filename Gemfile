@@ -56,6 +56,9 @@ gem "pry-byebug"
 gem "ingreedy"
 gem "activerecord-import"
 gem "kaminari"
+gem 'faker'
+gem 'friendly_id', '~> 5.5.0'
+
 
 group :development, :test do
   gem "dotenv-rails"
@@ -79,3 +82,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "hotwire_combobox"
