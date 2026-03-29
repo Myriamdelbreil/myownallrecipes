@@ -42,8 +42,11 @@ class RecipeImporterService
 
   def import_categories
     categories_names = recipes_data.pluck('category').uniq.compact_blank
+    categories_to_import = categories_names.map do |name|
+      Category.new(name:, slug: "#{name.parameterize}-#{Faker::Number.between(from: 1, to: 10000)}")
+    end
     Category.import(
-      categories_names.map { |n| { name: n } },
+      categories_to_import,
       on_duplicate_key_ignore: true,
       validate: false
     )
@@ -79,6 +82,7 @@ class RecipeImporterService
   def build_recipe(data)
     recipe = Recipe.new(
       title: data['title'],
+      slug: "#{data['title'].parameterize}-#{Faker::Number.between(from: 1, to: 10000)}",
       cook_time: data['cook_time'],
       prep_time: data['prep_time'],
       ratings: data['ratings'],

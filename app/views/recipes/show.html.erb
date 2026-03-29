@@ -1,12 +1,28 @@
 <div class="recipe-show-card container my-5">
   <%= link_to " < Back to recipes list", :back, class: "btn btn-light" %>
 
+  <h1 class='my-4'><%= @recipe.title.titleize %></h1>
   <div class="recipe-hero-image my-4">
     <%= image_tag @recipe.image_url.presence || "placeholder.jpg", alt: @recipe.title %>
   </div>
 
   <div class="ingredients-section p-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class='ingredient-card d-flex justify-content-evenly align-items-center py-2'>
+      <div class='d-flex flex-column'>
+        <div class='fw-bold'><%= Recipe.human_attribute_name(:total_prep_time) %></div>
+        <div><%= minutes_to_hours_and_minutes(@recipe.total_prep_time) %></div>
+      </div>
+      <div class='d-flex flex-column'>
+        <div class='fw-bold'><%= Recipe.human_attribute_name(:prep_time) %></div>
+        <div><%= minutes_to_hours_and_minutes(@recipe.prep_time) %></div>
+      </div>
+      <div class='d-flex flex-column'>
+        <div class='fw-bold'><%= Recipe.human_attribute_name(:cook_time) %></div>
+        <div><%= minutes_to_hours_and_minutes(@recipe.cook_time) %></div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center my-4">
       <h2 class="section-title m-0">Ingredients List</h2>
     </div>
 

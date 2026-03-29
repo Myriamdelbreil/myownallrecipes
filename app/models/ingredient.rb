@@ -16,4 +16,8 @@ class Ingredient < ApplicationRecord
 
   has_many :recipe_ingredients, dependent: :destroy,  inverse_of: :ingredient
   has_many :recipes, through: :recipe_ingredients
+
+  def to_combobox_display
+    name # Ici, on dit à la combobox d'afficher l'attribut "name" de l'ingrédient
+  end
 end

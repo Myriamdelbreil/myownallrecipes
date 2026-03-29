@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :categories, only: [:index] do
     resources :recipes, only: [:index], controller: 'categories/recipes'
   end
+  resources :ingredients, only: [:index]
 end

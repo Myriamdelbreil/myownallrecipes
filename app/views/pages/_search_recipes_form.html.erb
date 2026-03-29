@@ -1,0 +1,13 @@
+<% if params[:query] %>
+  <%= "Search results for #{params[:query].split(' ').join(', ')} (#{@recipes_count})"%>
+<% end %>
+<%= form_with url: recipes_path, method: :get, class: "search-form-control form-group d-flex my-4" do |f| %>
+  <%= f.text_field :query,
+        value: params[:query],
+        placeholder: "Type the ingredients you have",
+        class: "form-control me-2" %>
+  <%= button_tag(type: 'submit', class: "btn btn-flat d-flex align-items-center gap-2") do %>
+      <i class="fas fa-search"></i>
+      <span>Search</span>
+    <% end %>
+<% end %>
