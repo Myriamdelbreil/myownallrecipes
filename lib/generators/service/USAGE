@@ -1,0 +1,9 @@
+Description:
+    Generator to create your service and related test file
+
+Example:
+    bin/rails generate service Thing
+
+    This will create:
+        - a ThingService in app/services/thing_service.rb
+        - a ThingServiceTest in test/services/thing_service_test.rb

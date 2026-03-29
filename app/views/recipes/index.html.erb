@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="cards">
+    <% @recipes.each do |recipe| %>
+      <%= link_to recipe_path(recipe), class: "card-recipe" do %>
+        <%= image_tag recipe.image_url, alt: recipe.title %>
+        <div class="card-recipe-infos">
+          <h2><%= recipe.title %></h2>
+          <ul class="list-unstyled">
+            <% if recipe.ratings %>
+              <li><%= render_stars(recipe.ratings) %></li>
+            <% end %>
+            <li><i class="bi bi-stopwatch"></i> <%= recipe.formatted_prep_time %></li>
+            <li><i class="bi bi-basket"></i> <%= "#{@ingredients_counts_per_recipe[recipe.id] || 0} items" %></li>
+            <% if recipe.cuisine %>
+              <li><i class="bi bi-fork-knife"></i> <%= recipe.cuisine %></li>
+            <% end %>
+          </ul>
+          <%# <h2 class="card-recipe-pricing"></h2> %>
+        </div>
+      <%end%>
+    <% end %>
+  </div>
+  <div class="d-flex justify-content-end"><%= paginate @recipes %></div>
+
+</div>

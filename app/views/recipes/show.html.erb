@@ -1,0 +1,23 @@
+<div class="recipe-show-card container my-5">
+  <%= link_to " < Back to recipes list", :back, class: "btn btn-light" %>
+
+  <div class="recipe-hero-image my-4">
+    <%= image_tag @recipe.image_url.presence || "placeholder.jpg", alt: @recipe.title %>
+  </div>
+
+  <div class="ingredients-section p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="section-title m-0">Ingredients List</h2>
+    </div>
+
+    <ul class="list-unstyled">
+      <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
+        <li class="ingredient-card d-flex align-items-center p-3 mb-3">
+          <div class="ingredient-info">
+            <span class="ingredient-name"><%= recipe_ingredient.detailed_quantity %></span>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

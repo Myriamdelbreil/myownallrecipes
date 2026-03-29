@@ -70,7 +70,7 @@ challenge debrief.
 <summary><i>Do I really have to deploy the application online?</i></summary>
 Deploying the application does ensure a smooth interview experience by allowing interviewers to test your code live. However, you should not overinvest time (or money) on this if you really can't figure it. You can alternatively provide demo videos as a worst case option, as interviewers won't checkout and run the application to cover for missing demo or online version. In case you don't have an online application, please make sure everything is working smoothly
 locally before your debrief interview.
-  
+
 </details>
 
 <details>
