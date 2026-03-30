@@ -237,6 +237,9 @@ GEM
     pg (1.6.3-x86_64-darwin)
     pg (1.6.3-x86_64-linux)
     pg (1.6.3-x86_64-linux-musl)
+    pg_search (2.3.7)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     platform_agent (1.0.1)
       activesupport (>= 5.2.0)
       useragent (~> 0.16.3)
@@ -389,6 +392,7 @@ DEPENDENCIES
   kaminari
   minitest (~> 5.0)
   pg (~> 1.1)
+  pg_search
   pry-byebug
   puma (>= 5.0)
   rails (~> 7.1.5, >= 7.1.5.1)

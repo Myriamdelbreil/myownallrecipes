@@ -1,25 +1,18 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1506368249639-73a05d6f6488?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
-  <div class="container">
+  <div class="container h-75">
     <h1 class='text-center'>Find <strong>the best recipe</strong> for <strong>anything you crave</strong>!</h1>
     <h2 class='text-white text-center'>(and what you still have in your cupboards)</h2>
-    <%= form_with url: recipes_path, method: :get, local: true, class: "w-100" do |f| %>
-      <div class="m-4 p-2 border rounded-pill bg-white shadow-sm">
-        <div class='d-flex align-items-center gap-2'>
-          <div class="flex-grow-1">
-            <%= hw_combobox_tag :ingredient_ids,
-              ingredients_path,
-              multiselect: true,
-              multiselect_chip: true,
-              input: {
-                class: "form-control border-0",
-                placeholder: "Type the one ingredient you have"
-              } %>
-            <%= hw_combobox_tag :test, ["Pomme", "Poire", "Banane"], multiselect: true, multiselect_chip: true %>
-          </div>
+    <%= form_with url: recipes_path, method: :get, local: true, class: "w-100 h-75 gap-5 d-flex align-items-center justify-content-center flex-column" do |f| %>
+      <%= hw_combobox_tag :ingredient_ids,
+          ingredients_path,
+          multiple: true,
+          multiselect_chip_src: chip_ingredients_path,
+          input: {
+            class: "form-control",
+            placeholder: "Enter what's left in your kitchen"
+          } %>
 
-          <%= f.submit "Find and cook", class: "btn btn-primary rounded-pill px-4" %>
-        </div>
-      </div>
+      <%= f.submit "Find and cook", class: "btn btn-primary rounded-pill p-4 w-75" %>
     <% end %>
   </div>
 </div>

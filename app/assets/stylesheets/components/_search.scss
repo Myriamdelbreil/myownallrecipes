@@ -1,3 +1,10 @@
+.form-control:focus {
+    background-color: white;
+    border: 0px;
+    outline: none;
+    box-shadow:none;
+}
+
 .search-form-control {
   position: relative;
 }
@@ -16,29 +23,41 @@
 }
 
 .search-form-control .form-control:focus {
-  border: 1px solid #1EDD88;
   outline: none !important;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
+----
 
-fieldset.hw-combobox {
-  width: 100% !important;
+fieldset.hw-combobox,
+.hw-combobox,
+.hw-combobox--multiple {
   display: block !important;
-}
-
-@media (min-width: 992px) {
-  fieldset.hw-combobox {
-    width: 50% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-}
-
-.hw-combobox__main__wrapper {
   width: 100% !important;
-  display: flex !important;
-  flex-direction: column;
+  min-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+
+  .hw-combobox__main__wrapper {
+    justify-content: center;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    box-sizing: border-box !important;
+    min-height: 60px;
+    border-radius: var(--bs-border-radius-pill) !important;
+    padding: 24px;
+    input {
+      border: none;
+      background-color: white;
+      .form-control &:focus {
+        border: none;
+      }
+      width: 75%;
+      text-align: center;
+    }
+  }
 }
 
 .hw-combobox__input {
@@ -46,17 +65,9 @@ fieldset.hw-combobox {
   flex-grow: 1;
 }
 
-.hw-combobox {
-  border: 1px solid #dee2e6;
-  border-radius: 50px;
-  padding: 5px 15px;
-  background: white;
-  transition: border-color 0.2s;
-}
-
 .hw-combobox:focus-within {
-  border-color: #0d6efd;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  border: none;
+  box-shadow: none;
 }
 
 .hw-combobox__chip {
