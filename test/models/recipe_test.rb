@@ -8,6 +8,7 @@
 #  image_url   :string
 #  prep_time   :integer          not null
 #  ratings     :float
+#  slug        :string           not null
 #  title       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -16,6 +17,7 @@
 # Indexes
 #
 #  index_recipes_on_category_id  (category_id)
+#  index_recipes_on_slug         (slug) UNIQUE
 #
 # Foreign Keys
 #

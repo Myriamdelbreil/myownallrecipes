@@ -9,6 +9,6 @@ namespace :recipes do
     Rails.logger.info("#{Recipe.count} recipes, #{Ingredient.count} ingredients.")
     Rails.logger.info("#{RecipeIngredient.count} recipe_ingredients, #{Category.count} categories.")
   rescue => e
-    Rails.logger.warning("Import failed, #{e.message}")
+    Rails.logger.warn("Import failed, #{e.message}")
   end
 end

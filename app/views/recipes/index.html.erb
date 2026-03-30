@@ -1,5 +1,12 @@
 <div class="container">
-  <%= render('pages/search_recipes_form')%>
+  <% if @recipes_count.zero? %>
+    <h1>Sorry, we didn't find anything...</h1>
+    <h2>Search again?</h2>
+    <%= render('pages/search_recipes_form')%>
+    <h2>Or find our most common recipes</h2>
+  <% else %>
+    <%= render('pages/search_recipes_form')%>
+  <% end %>
 
   <div class="cards mt-4">
     <% @recipes.each do |recipe| %>
@@ -21,5 +28,6 @@
       <%end%>
     <% end %>
   </div>
+
   <div class="my-4 d-flex justify-content-center"><%= paginate @recipes %></div>
 </div>
