@@ -97,14 +97,14 @@ class RecipeImporterService
       if fetched_ingredient.is_a?(Ingreedy::Parser::Result)
         recipe.recipe_ingredients.build(
           ingredient: @ingredients[fetched_ingredient.ingredient],
-          original_text: raw_text,
+          original_text: parsed_ingredients,
           unit: fetched_ingredient.unit,
-          quantity: fetched_ingredient.quantity,
+          quantity: fetched_ingredient.amount,
         )
       else
         recipe.recipe_ingredients.build(
           ingredient: @ingredients[fetched_ingredient],
-          original_text: raw_text,
+          original_text: parsed_ingredients,
         )
       end
     end
