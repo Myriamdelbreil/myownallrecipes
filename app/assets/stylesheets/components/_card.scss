@@ -2,6 +2,17 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
+  justify-content: center
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.cards.few-cards {
+  grid-template-columns: repeat(auto-fit, 350px);
+  justify-content: center;
+  grid-gap: 30px;
 }
 
 .card-category {
@@ -94,6 +105,7 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  gap: 8px;
 }
 
 .card-recipe-infos .card-recipe-user {
@@ -108,6 +120,7 @@
   height: 350px;
   overflow: hidden;
   border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 
   img {
     width: 100%;

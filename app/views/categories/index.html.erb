@@ -1,22 +1,28 @@
-<div class="container">
-  <%= simple_form_for :search, url: categories_path, method: :get do |f| %>
-    <div class="search-form-control form-group">
-      <input class="form-control string required" type="text" name="search[query]" id="search_query" />
-      <button name="button" type="submit" class="btn btn-flat">
-        <i class="fas fa-search"></i> Search
-      </button>
-    </div>
+<div class="container my-4">
+  <% if params[:query] %>
+    <%= "Search results for #{params[:query].split(' ').join(', ')} (#{@categories_count})"%>
+  <% end %>
+  <%= form_with url: categories_path, method: :get, class: "search-form-control form-group d-flex my-4" do |f| %>
+    <%= f.text_field :query,
+          value: params[:query],
+          placeholder: "Search for a category",
+          class: "form-control me-2" %>
+    <%= button_tag(type: 'submit', class: "btn btn-flat d-flex align-items-center gap-2") do %>
+      <i class="fas fa-search"></i>
+      <span>Search</span>
+    <% end %>
   <% end %>
 </div>
 
 <div class="container">
   <div class="cards">
     <% @categories.each do |category| %>
-      <%= link_to category_recipes_path(category) do %>
+      <%= link_to category_recipes_path(category), class:'text-center' do %>
         <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
           <%= category.name %>
         </div>
       <% end %>
     <% end %>
   </div>
+  <div class="d-flex justify-content-end"><%= paginate @categories %></div>
 </div>

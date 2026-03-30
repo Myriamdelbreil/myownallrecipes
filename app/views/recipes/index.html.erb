@@ -1,5 +1,14 @@
 <div class="container">
-  <div class="cards">
+  <% if @recipes_count.zero? %>
+    <h1>Sorry, we didn't find anything...</h1>
+    <h2>Search again?</h2>
+    <%= render('pages/search_recipes_form')%>
+    <h2>Or find our most common recipes</h2>
+  <% else %>
+    <%= render('pages/search_recipes_form')%>
+  <% end %>
+
+  <div class="cards mt-4">
     <% @recipes.each do |recipe| %>
       <%= link_to recipe_path(recipe), class: "card-recipe" do %>
         <%= image_tag recipe.image_url, alt: recipe.title %>
@@ -15,11 +24,10 @@
               <li><i class="bi bi-fork-knife"></i> <%= recipe.cuisine %></li>
             <% end %>
           </ul>
-          <%# <h2 class="card-recipe-pricing"></h2> %>
         </div>
       <%end%>
     <% end %>
   </div>
-  <div class="d-flex justify-content-end"><%= paginate @recipes %></div>
 
+  <div class="my-4 d-flex justify-content-center"><%= paginate @recipes %></div>
 </div>

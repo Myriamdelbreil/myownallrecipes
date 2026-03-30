@@ -33,6 +33,7 @@ class RecipeImporterService
     end
     Category.import(categories_to_import, on_duplicate_key_ignore: true, validate: false)
     Category.where(name: names).index_by(&:name)
+
   end
 
   def import_ingredients_for_batch(batch)
