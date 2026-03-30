@@ -1,0 +1,15 @@
+[
+  {
+    "title": "Tarte aux Pommes",
+    "cook_time": 30,
+    "prep_time": 15,
+    "ratings": 4.5,
+    "cuisine": "Française",
+    "category": "Dessert",
+    "image": "https://example.com/image.jpg",
+    "ingredients": [
+      "3 pommes",
+      "1 pâte feuilletée"
+    ]
+  }
+]
