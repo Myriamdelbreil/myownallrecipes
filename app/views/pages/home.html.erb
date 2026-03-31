@@ -13,7 +13,7 @@
             placeholder: "Enter what's left in your kitchen"
           } %>
 
-      <%= f.submit "Find and cook", class: "btn btn-primary rounded-pill p-4 w-75" %>
+      <%= f.submit "Find and cook", class: "btn btn-primary rounded-pill w-75 text-wrap" %>
     <% end %>
   </div>
 </div>
@@ -36,7 +36,7 @@
 
 <div class="container my-4">
   <h1 class="text-center">Still not sure ?</h1>
-  <div class="text-center d-flex justify-content-around my-4">
+  <div class="text-center d-flex justify-content-around my-4 flex-column gap-1 flex-lg-row flex-md-row">
     <%= link_to 'Browse recipes', recipes_path, class: 'btn btn-primary rounded-pill'  %>
     <%= link_to 'Browse categories', categories_path, class: 'btn btn-primary rounded-pill'  %>
   </div>

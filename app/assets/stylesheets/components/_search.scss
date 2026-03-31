@@ -50,6 +50,7 @@ fieldset.hw-combobox,
     input {
       border: none;
       background-color: white;
+      text-wrap: auto;
       .form-control &:focus {
         border: none;
       }

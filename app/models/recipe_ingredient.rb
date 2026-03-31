@@ -26,8 +26,6 @@ class RecipeIngredient < ApplicationRecord
   belongs_to :ingredient, inverse_of: :recipe_ingredients
 
   validates :original_text, presence: true
-  validates :quantity, presence: true
-  validates :unit, presence: true
 
   def detailed_quantity
     "#{formatted_quantity} #{unit} #{ingredient.name}"
