@@ -1,0 +1,10 @@
+# "tomatoes" and "garlic" are in SHARED_INGREDIENTS (config/ingredients.yml)
+# "exotic spice" is NOT in SHARED_INGREDIENTS — used to test fallback behaviour
+tomatoes:
+  name: tomatoes
+
+garlic:
+  name: garlic
+
+exotic_spice:
+  name: exotic spice

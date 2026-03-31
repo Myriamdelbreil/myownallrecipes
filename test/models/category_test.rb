@@ -16,7 +16,22 @@
 require "test_helper"
 
 class CategoryTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  class Scopes < self
+    test "search_by_name returns matching categories" do
+      results = Category.search_by_name("break")
+      assert_includes results, categories(:breakfast)
+      assert_not_includes results, categories(:dessert)
+    end
+
+    test "search_by_name is case insensitive" do
+      results = Category.search_by_name("BREAKFAST")
+      assert_includes results, categories(:breakfast)
+    end
+
+    test "search_by_name returns all categories when query is blank" do
+      results = Category.search_by_name("")
+      assert_includes results, categories(:breakfast)
+      assert_includes results, categories(:dessert)
+    end
+  end
 end

@@ -1,0 +1,27 @@
+pasta_tomatoes:
+  recipe: pasta
+  ingredient: tomatoes
+  quantity: 2.0
+  unit: cup
+  original_text: 2 cups tomatoes
+
+pasta_garlic:
+  recipe: pasta
+  ingredient: garlic
+  quantity: 3.0
+  unit: clove
+  original_text: 3 cloves garlic
+
+soup_garlic:
+  recipe: garlic_soup
+  ingredient: garlic
+  quantity: 4.0
+  unit: clove
+  original_text: 4 cloves garlic
+
+long_dish_exotic:
+  recipe: long_dish
+  ingredient: exotic_spice
+  quantity: 1.0
+  unit: pinch
+  original_text: 1 pinch exotic spice
