@@ -35,7 +35,8 @@ class Recipe < ApplicationRecord
   has_many :recipe_ingredients, dependent: :destroy, inverse_of: :recipe
   has_many :ingredients, through: :recipe_ingredients
 
-  validates :cook_time, :prep_time, :title, :slug, presence: true
+  validates :title, :slug, presence: true
+  validates :cook_time, :prep_time, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   # Scope de base pour inclure les calculs nécessaires au tri
   scope :with_stats, -> {
@@ -84,10 +85,5 @@ class Recipe < ApplicationRecord
 
   def total_prep_time
     prep_time + cook_time
-  end
-
-  def formatted_prep_time
-    total = total_prep_time
-    total < 60 ? "#{total} min" : Time.at(total * 60).utc.strftime("%Hh%M").sub(/^0h/, '')
   end
 end
