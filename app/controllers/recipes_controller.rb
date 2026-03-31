@@ -4,9 +4,9 @@ class RecipesController < ApplicationController
 
     case params[:sort]
     when 'duration'
-      recipes = search_base.order_by_total_prep_time(params[:direction] || :asc)
+      recipes = search_base.order_by_total_prep_time(safe_direction)
     when 'ingredients_count'
-      recipes = search_base.order_by_ingredients_count(params[:direction] || :asc)
+      recipes = search_base.order_by_ingredients_count(safe_direction)
     else
       recipes = search_base.with_search_score
     end
