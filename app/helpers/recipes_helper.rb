@@ -19,7 +19,7 @@ module RecipesHelper
   end
 
   def recipe_image_for(recipe)
-    image_path = recipe.image_url.presence || "default_recipe.jpg"
+    image_path = recipe.image_url.presence || "generic.jpg"
 
     image_tag image_path,
               class: "card-img-top",
