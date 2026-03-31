@@ -1,12 +1,12 @@
 <%= link_to recipe_path(recipe), class: "card-recipe" do %>
   <%= recipe_image_for(recipe) %>
-  <div class="card-recipe-infos">
+  <div class="card-recipe-infos flex-column flex-lg-row flex-md-row">
     <h2><%= recipe.title %></h2>
     <ul class="list-unstyled">
       <% if recipe.ratings %>
         <li><%= render_stars(recipe.ratings) %></li>
       <% end %>
-      <li><i class="bi bi-stopwatch"></i> <%= minutes_to_hours_and_minutes(recipe.total_prep_time) %></li>
+      <li><i class="bi bi-stopwatch"></i> <%= recipe.formatted_prep_time %></li>
       <li><i class="bi bi-basket"></i> <%= "#{recipe.ingredients_count} items" %></li>
       <% if recipe.cuisine %>
         <li><i class="bi bi-fork-knife"></i> <%= recipe.cuisine %></li>
