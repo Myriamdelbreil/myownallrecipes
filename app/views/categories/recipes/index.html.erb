@@ -10,21 +10,7 @@
     <%= "Search results for #{params[:ingredient_names].split(',').map(&:capitalize).join(', ')} (#{@recipes_count})"%>
   <% end %>
 
-  <div class="container">
-    <%= form_with url: category_recipes_path(@category), method: :get, local: true, class: "w-100 p-1 row gap-3 gap-lg-4 d-flex flex-column flex-lg-row align-items-center justify-content-center" do |f| %>
-      <%= hw_combobox_tag :ingredient_names,
-            SHARED_INGREDIENTS.map { |i| [i.capitalize, i] },
-            multiple: true,
-            multiselect_chip_src: chip_ingredients_path,
-            free_text: true,
-            input: {
-              class: "form-control col-6",
-              placeholder: "Enter what's left in your kitchen"
-            } %>
-
-      <%= f.submit "Find and cook", class: "btn btn-primary rounded-pill p-1 w-75 col-6" %>
-    <% end %>
-  </div>
+  <%= render partial: 'pages/search_recipes_form', locals: { url: category_recipes_path(@category) } %>
 
   <div class="cards my-4">
     <% @recipes.each do |recipe| %>
