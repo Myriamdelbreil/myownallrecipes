@@ -20,3 +20,28 @@
   opacity: .7;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
+
+@media (max-width: 768px) {
+  .banner {
+    padding: 40px 0;
+    height: auto;
+    min-height: 80vh;
+  }
+
+  .banner .container {
+    height: auto !important;
+  }
+
+  .banner form {
+    height: auto !important;
+    gap: 1rem !important;
+  }
+
+  .banner h1 {
+    font-size: 22px;
+  }
+
+  .banner h2 {
+    font-size: 16px;
+  }
+}
