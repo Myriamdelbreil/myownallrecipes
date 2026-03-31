@@ -1,0 +1,21 @@
+pasta:
+  title: Pasta Bolognese
+  cook_time: 20
+  prep_time: 10
+  ratings: 4.5
+  slug: pasta-bolognese
+
+garlic_soup:
+  title: Garlic Soup
+  cook_time: 5
+  prep_time: 5
+  ratings: 3.8
+  slug: garlic-soup
+
+long_dish:
+  title: Long Braised Chicken
+  cook_time: 90
+  prep_time: 30
+  ratings: 4.9
+  slug: long-braised-chicken
+  category: breakfast

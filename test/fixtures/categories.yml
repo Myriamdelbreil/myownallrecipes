@@ -1,0 +1,7 @@
+breakfast:
+  name: Breakfast
+  slug: breakfast
+
+dessert:
+  name: Dessert
+  slug: dessert

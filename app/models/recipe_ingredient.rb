@@ -30,6 +30,21 @@ class RecipeIngredient < ApplicationRecord
   validates :unit, presence: true
 
   def detailed_quantity
-    "#{quantity} #{unit} #{ingredient.name}"
+    "#{formatted_quantity} #{unit} #{ingredient.name}"
+  end
+
+  private
+
+  def formatted_quantity
+    r = quantity.rationalize(0.01)
+    if r.denominator == 1
+      r.numerator.to_s
+    elsif r.denominator <= 16
+      whole = r.numerator / r.denominator
+      frac = r - whole
+      whole > 0 ? "#{whole} #{frac.numerator}/#{frac.denominator}" : "#{r.numerator}/#{r.denominator}"
+    else
+      quantity.round(2)
+    end
   end
 end

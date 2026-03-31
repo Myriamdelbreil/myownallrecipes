@@ -1,7 +1,7 @@
 class IngredientsController < ApplicationController
   def index
     if params[:q].present?
-      @ingredients = SHARED_INGREDIENTS.select { |i| i.include?(query) }
+      @ingredients = SHARED_INGREDIENTS.select { |i| i.downcase.include?(params[:q].downcase) }
     else
       @ingredients = SHARED_INGREDIENTS.first(20)
     end

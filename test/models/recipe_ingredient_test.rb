@@ -24,7 +24,8 @@
 require "test_helper"
 
 class RecipeIngredientTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "detailed_quantity combines quantity, unit and ingredient name" do
+    ri = recipe_ingredients(:pasta_tomatoes) # quantity=2.0, unit=cup, ingredient=tomatoes
+    assert_equal "2.0 cup tomatoes", ri.detailed_quantity
+  end
 end
