@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_29_151452) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_31_162314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_29_151452) do
     t.string "slug", null: false
     t.index ["category_id"], name: "index_recipes_on_category_id"
     t.index ["slug"], name: "index_recipes_on_slug", unique: true
+    t.check_constraint "cook_time >= 0", name: "check_cook_time_non_negative"
+    t.check_constraint "prep_time >= 0", name: "check_prep_time_non_negative"
   end
 
   add_foreign_key "recipe_ingredients", "ingredients"
