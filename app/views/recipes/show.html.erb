@@ -46,12 +46,12 @@
 
     <div class="d-flex flex-column flex-lg-row flex-md-row gap-1">
 
-      <%= link_to "https://www.allrecipes.com/search?q=#{@recipe.title}", class: 'btn btn-success rounded-pill w-50' do %>
+      <%= link_to "https://www.allrecipes.com/search?q=#{@recipe.title}", class: 'btn btn-success rounded-pill w-50', target: '_blank' do %>
         <i class="bi bi-card-checklist"></i>
         Find the steps
       <% end %>
 
-      <%= link_to "https://www.carrefour.com", class: 'btn btn-info rounded-pill w-50' do %>
+      <%= link_to "https://www.carrefour.com", class: 'btn btn-info rounded-pill w-50', target: '_blank' do %>
         <i class="bi bi-bag"></i>
         Have all you need delivered
       <% end %>
