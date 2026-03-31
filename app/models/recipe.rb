@@ -24,6 +24,8 @@
 #  fk_rails_...  (category_id => categories.id)
 #
 class Recipe < ApplicationRecord
+  include PgSearch::Model
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -39,8 +41,15 @@ class Recipe < ApplicationRecord
   validates :title, presence: true
   validates :slug, presence: true
 
+
+  # scope :by_minimal_ingredients, -> {
+  #   joins(:recipe_ingredients)
+  #     .group(:id)
+  #     .order(Arel.sql('COUNT(recipe_ingredients.id) ASC'))
+  # }
+
   scope :search_by_ingredients_names, ->(query) {
-    return all if query.blank?
+    return Recipe.none if query.blank?
 
     words = query.downcase.split(/[\s,]+/).reject(&:blank?)
     like_conditions = words.map { "%#{_1}%" }
@@ -54,21 +63,24 @@ class Recipe < ApplicationRecord
       .having(
         "COUNT(DISTINCT CASE #{words.each_with_index.map { |_, i| "WHEN lower(ingredients.name) LIKE ? THEN #{i}" }.join(" ")} END) = ?",
         *like_conditions, words.length
-      ).or(
-        where("name LIKE ?", like_conditions)
       )
   }
 
-  scope :search_by_ingredients_ids, ->(ingredient_ids) {
-    return all if ingredient_ids.blank?
+  pg_search_scope :search_by_name,
+    against: :title,
+    using: {
+      tsearch: { any_word: false, prefix: true }
+    }
 
-    ids = ingredient_ids.is_a?(String) ? ingredient_ids.split(",") : ingredient_ids
-
-    joins(:ingredients)
-      .where(ingredients: { id: ids })
-      .group("recipes.id")
-      .having("COUNT(DISTINCT ingredients.id) = ?", ids.length)
+  scope :with_search_score, -> {
+    select("recipes.*")
+    .select("COUNT(ingredients.id) AS ingredients_count")
+    .select("(COUNT(ingredients.id) * 10 + (COALESCE(prep_time, 0) + COALESCE(cook_time, 0)) * 0.5) AS search_score")
+    .joins(:ingredients)
+    .group("recipes.id")
+    .order("search_score ASC")
   }
+
 
   def total_prep_time
     prep_time + cook_time

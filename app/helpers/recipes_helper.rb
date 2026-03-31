@@ -8,9 +8,9 @@ module RecipesHelper
     empty_stars = 5 - full_stars - (half_star ? 1 : 0)
 
     content_tag(:div, class: "recipe-stars d-inline-flex align-items-center gap-1") do
-      full_stars.times { concat content_tag(:i, "", class: "bi bi-star-fill text-primary") }
+      full_stars.times { concat content_tag(:i, "", class: "bi bi-star-fill text-secondary") }
 
-      concat content_tag(:i, "", class: "bi bi-star-half text-primary") if half_star
+      concat content_tag(:i, "", class: "bi bi-star-half text-secondary") if half_star
 
       empty_stars.times { concat content_tag(:i, "", class: "bi bi-star text-muted") }
 

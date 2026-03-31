@@ -1,7 +1,10 @@
+<% content_for :title, "Categories" %>
+
 <div class="container my-4">
   <% if params[:query] %>
     <%= "Search results for #{params[:query].split(' ').join(', ')} (#{@categories_count})"%>
   <% end %>
+
   <%= form_with url: categories_path, method: :get, class: "search-form-control form-group d-flex my-4" do |f| %>
     <%= f.text_field :query,
           value: params[:query],

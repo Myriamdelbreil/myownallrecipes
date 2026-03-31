@@ -58,6 +58,7 @@ gem "activerecord-import"
 gem "kaminari"
 gem 'faker'
 gem 'friendly_id', '~> 5.5.0'
+gem 'pg_search'
 
 
 group :development, :test do
