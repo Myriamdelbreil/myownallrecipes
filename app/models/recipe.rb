@@ -36,7 +36,6 @@ class Recipe < ApplicationRecord
   validates :title, :slug, presence: true
   validates :cook_time, :prep_time, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
-  # Scope de base pour inclure les calculs nécessaires au tri
   scope :with_stats, -> {
     joins(:ingredients)
       .select("recipes.*")
@@ -45,7 +44,6 @@ class Recipe < ApplicationRecord
       .group("recipes.id")
   }
 
-  # Tri par score (ton calcul custom)
   scope :with_search_score, -> {
     with_stats
       .select("COUNT(ingredients.id) AS ingredients_count")
@@ -53,19 +51,16 @@ class Recipe < ApplicationRecord
       .order(Arel.sql("search_score ASC"))
   }
 
-  # Tri par durée (Somme des deux colonnes)
   scope :order_by_total_prep_time, ->(direction = :asc) {
     with_stats
       .order(Arel.sql("total_duration #{direction}"))
   }
 
-  # Tri par nombre d'ingrédients
   scope :order_by_ingredients_count, ->(direction = :asc) {
     with_stats
       .order(Arel.sql("ingredients_count #{direction}"))
   }
 
-  # Tes scopes de recherche
   pg_search_scope :search_by_name,
     against: :title,
     using: { tsearch: { any_word: false, prefix: true } }
