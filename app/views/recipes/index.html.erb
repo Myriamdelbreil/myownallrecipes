@@ -2,19 +2,42 @@
 
 
 <div class="container">
-  <% if @recipes_count.zero? %>
+  <% if @recipes.empty? %>
     <h1>Sorry, we didn't find anything...</h1>
     <h2>Search again?</h2>
     <%= render('pages/search_recipes_form')%>
     <h2>Or find our most common recipes</h2>
   <% else %>
-    <%= render('pages/search_recipes_form')%>
+    <%= render partial: 'pages/search_recipes_form', locals: { query: params[:ingredient_names], count: @recipes_count } %>
+    <div class="d-flex align-items-center gap-2 mb-4 p-3">
+      <span class="text-muted fw-bold small text-uppercase me-2">Order by :</span>
+
+      <%
+        duration_dir = (params[:sort] == 'duration' && params[:direction] == 'asc') ? 'desc' : 'asc'
+        duration_icon = params[:sort] == 'duration' ? (params[:direction] == 'asc' ? '↑' : '↓') : ''
+      %>
+      <%= link_to recipes_path(ingredient_names: params[:ingredient_names], sort: 'duration', direction: duration_dir),
+          class: "btn btn-sm #{params[:sort] == 'duration' ? 'btn-primary' : 'btn-outline-primary'} rounded-pill" do %>
+        ⏱️ Time <%= duration_icon %>
+      <% end %>
+
+      <%
+        ing_dir = (params[:sort] == 'ingredients_count' && params[:direction] == 'asc') ? 'desc' : 'asc'
+        ing_icon = params[:sort] == 'ingredients_count' ? (params[:direction] == 'asc' ? '↑' : '↓') : ''
+      %>
+      <%= link_to recipes_path(ingredient_names: params[:ingredient_names], sort: 'ingredients_count', direction: ing_dir),
+          class: "btn btn-sm #{params[:sort] == 'ingredients_count' ? 'btn-success' : 'btn-outline-success'} rounded-pill" do %>
+        🍎 Number of ingredients <%= ing_icon %>
+      <% end %>
+
+      <%= link_to "Reset", recipes_path, class: "btn btn-light rounded-pill text-muted text-decoration-none" %>
+    </div>
   <% end %>
 
   <div class="cards mt-4">
     <% @recipes.each do |recipe| %>
       <%= link_to recipe_path(recipe), class: "card-recipe" do %>
-        <%= image_tag recipe.image_url, alt: recipe.title %>
+        <%= recipe_image_for(recipe) %>
         <div class="card-recipe-infos">
           <h2><%= recipe.title %></h2>
           <ul class="list-unstyled">

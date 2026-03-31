@@ -16,9 +16,12 @@
 class Category < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
+  before_validation :generate_slug, if: :name_changed?
+
 
   validates :name, presence: true
   has_many :recipes
+
 
   scope :search_by_name, ->(query) {
     return all if query.blank?
