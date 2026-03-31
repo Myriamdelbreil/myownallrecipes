@@ -1,21 +1,18 @@
-<% if params[:query] %>
-  <%= "Search results for #{params[:query].split(' ').join(', ')} (#{@recipes_count})"%>
-<% end %>
-
-<% if @ingredients %>
-  <%= "Search results for #{@ingredients.pluck(:name).join(', ')} (#{@recipes_count})"%>
+<% if params[:ingredient_names] %>
+  <%= "Search results for #{params[:ingredient_names].split(',').map(&:capitalize).join(', ')} (#{@recipes_count})"%>
 <% end %>
 
 <div class="container">
   <%= form_with url: recipes_path, method: :get, local: true, class: "w-100 p-1 gap-5 d-flex align-items-center justify-content-center" do |f| %>
-    <%= hw_combobox_tag :ingredient_ids,
-        ingredients_path,
-        multiple: true,
-        multiselect_chip_src: chip_ingredients_path,
-        input: {
-          class: "form-control py-1",
-          placeholder: "Enter what's left in your kitchen"
-        } %>
+    <%= hw_combobox_tag :ingredient_names,
+          SHARED_INGREDIENTS.map { |i| [i.capitalize, i] },
+          multiple: true,
+          multiselect_chip_src: chip_ingredients_path,
+          free_text: true,
+          input: {
+            class: "form-control",
+            placeholder: "Enter what's left in your kitchen"
+          } %>
 
     <%= f.submit "Find and cook", class: "btn btn-primary rounded-pill p-1 w-75" %>
   <% end %>

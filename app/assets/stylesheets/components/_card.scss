@@ -2,10 +2,15 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
-  justify-content: center
+  justify-content: center;
 
   a {
     text-decoration: none;
+    color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
   }
 }
 

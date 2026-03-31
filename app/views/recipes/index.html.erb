@@ -1,3 +1,6 @@
+<% content_for :title, "Recipes" %>
+
+
 <div class="container">
   <% if @recipes_count.zero? %>
     <h1>Sorry, we didn't find anything...</h1>
@@ -19,7 +22,7 @@
               <li><%= render_stars(recipe.ratings) %></li>
             <% end %>
             <li><i class="bi bi-stopwatch"></i> <%= recipe.formatted_prep_time %></li>
-            <li><i class="bi bi-basket"></i> <%= "#{@ingredients_counts_per_recipe[recipe.id] || 0} items" %></li>
+            <li><i class="bi bi-basket"></i> <%= "#{recipe.ingredients_count} items" %></li>
             <% if recipe.cuisine %>
               <li><i class="bi bi-fork-knife"></i> <%= recipe.cuisine %></li>
             <% end %>

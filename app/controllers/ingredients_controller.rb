@@ -1,16 +1,20 @@
 class IngredientsController < ApplicationController
   def index
     if params[:q].present?
-      @ingredients = Ingredient.search_by_name(params[:q])
+      @ingredients = SHARED_INGREDIENTS.select { |i| i.include?(query) }
     else
-      @ingredients = Ingredient.none
+      @ingredients = SHARED_INGREDIENTS.first(20)
     end
 
     render turbo_stream: helpers.async_combobox_options(@ingredients)
   end
 
   def chip
-    @ingredients = Ingredient.where(id: params[:combobox_values])
-    render turbo_stream: helpers.combobox_selection_chips_for(@ingredients)
+    values = params[:combobox_values].to_s.split(",").reject(&:blank?)
+
+    @selected_ingredients = values.map do |val|
+      Ingredient.new(name: val.capitalize)
+    end
+    render turbo_stream: helpers.combobox_selection_chips_for(@selected_ingredients)
   end
 end

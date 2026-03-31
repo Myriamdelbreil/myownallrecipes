@@ -2,11 +2,14 @@
 ingredients:
   - cheese
   - chicken
-  - pepper
+  - pasta
   - onion
-  - sauce
-  - tomatoes
+  - tomato sauce
   - potatoes
+  - tomatoes
+  - pepper
+  - butter
+  - sauce
   - leaves
   - bell
   - beans
@@ -18,7 +21,6 @@ ingredients:
   - seasoning
   - rice
   - onions
-  - butter
   - flour
   - breast
   - cream
@@ -33,7 +35,6 @@ ingredients:
   - salt
   - bacon
   - dressing
-  - pasta
   - milk
   - lettuce
   - basil
@@ -129,3 +130,4 @@ ingredients:
   - sesame
   - taco
   - sirloin
+  - fish

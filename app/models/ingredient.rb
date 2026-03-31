@@ -19,8 +19,6 @@ class Ingredient < ApplicationRecord
   has_many :recipe_ingredients, dependent: :destroy,  inverse_of: :ingredient
   has_many :recipes, through: :recipe_ingredients
 
-  BASIC_CEREALS = ['pasta', 'rice']
-
   pg_search_scope :search_by_name,
                   against: :name,
                   using: {

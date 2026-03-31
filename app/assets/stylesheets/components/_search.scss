@@ -79,6 +79,7 @@ fieldset.hw-combobox,
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  text-align: center
 }
 
 .hw-combobox__chip__remover {
@@ -87,6 +88,10 @@ fieldset.hw-combobox,
   font-weight: bold;
 }
 
-.hw-combobox__chip__remover:hover {
-  color: #dc3545;
+.hw-combobox__listbox{
+  border-radius: var(--bs-border-radius-pill) !important;
+  height: 10vh;
+  .hw-combobox__option {
+    text-align: center;
+  }
 }

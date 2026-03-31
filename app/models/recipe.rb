@@ -42,11 +42,11 @@ class Recipe < ApplicationRecord
   validates :slug, presence: true
 
 
-  scope :by_minimal_ingredients, -> {
-    joins(:recipe_ingredients)
-      .group(:id)
-      .order(Arel.sql('COUNT(recipe_ingredients.id) ASC'))
-  }
+  # scope :by_minimal_ingredients, -> {
+  #   joins(:recipe_ingredients)
+  #     .group(:id)
+  #     .order(Arel.sql('COUNT(recipe_ingredients.id) ASC'))
+  # }
 
   scope :search_by_ingredients_names, ->(query) {
     return Recipe.none if query.blank?
@@ -72,18 +72,15 @@ class Recipe < ApplicationRecord
       tsearch: { any_word: false, prefix: true }
     }
 
-  scope :search_by_ingredients_ids, ->(ingredient_ids) {
-    return Recipe.none if ingredient_ids.blank?
-
-    ids = ingredient_ids.is_a?(String) ? ingredient_ids.split(",") : ingredient_ids
-    ids = ids.map(&:to_i).reject(&:zero?)
-
-    select("recipes.*, COUNT(DISTINCT ingredients.id) AS matches_count")
-      .joins(:ingredients)
-      .where(ingredients: { id: ids })
-      .group("recipes.id")
-      .order(Arel.sql("COUNT(DISTINCT ingredients.id) DESC, recipes.created_at DESC"))
+  scope :with_search_score, -> {
+    select("recipes.*")
+    .select("COUNT(ingredients.id) AS ingredients_count")
+    .select("(COUNT(ingredients.id) * 10 + (COALESCE(prep_time, 0) + COALESCE(cook_time, 0)) * 0.5) AS search_score")
+    .joins(:ingredients)
+    .group("recipes.id")
+    .order("search_score ASC")
   }
+
 
   def total_prep_time
     prep_time + cook_time
