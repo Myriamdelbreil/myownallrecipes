@@ -9,18 +9,20 @@
   </div>
 
   <div class="ingredients-section p-4">
-    <div class='ingredient-card d-flex justify-content-evenly align-items-center py-2'>
-      <div class='d-flex flex-column'>
-        <div class='fw-bold'><%= Recipe.human_attribute_name(:total_prep_time) %></div>
-        <div><%= minutes_to_hours_and_minutes(@recipe.total_prep_time) %></div>
-      </div>
-      <div class='d-flex flex-column'>
-        <div class='fw-bold'><%= Recipe.human_attribute_name(:prep_time) %></div>
-        <div><%= minutes_to_hours_and_minutes(@recipe.prep_time) %></div>
-      </div>
-      <div class='d-flex flex-column'>
-        <div class='fw-bold'><%= Recipe.human_attribute_name(:cook_time) %></div>
-        <div><%= minutes_to_hours_and_minutes(@recipe.cook_time) %></div>
+    <div class='ingredient-card d-flex justify-content-evenly align-items-center py-2 flex-column flex-lg-row flex-md-row'>
+      <div>
+        <div class='d-flex flex-column'>
+          <div class='fw-bold'><%= Recipe.human_attribute_name(:total_prep_time) %></div>
+          <div><%= minutes_to_hours_and_minutes(@recipe.total_prep_time) %></div>
+        </div>
+        <div class='d-flex flex-column'>
+          <div class='fw-bold'><%= Recipe.human_attribute_name(:prep_time) %></div>
+          <div><%= minutes_to_hours_and_minutes(@recipe.prep_time) %></div>
+        </div>
+        <div class='d-flex flex-column'>
+          <div class='fw-bold'><%= Recipe.human_attribute_name(:cook_time) %></div>
+          <div><%= minutes_to_hours_and_minutes(@recipe.cook_time) %></div>
+        </div>
       </div>
     </div>
 
@@ -37,5 +39,32 @@
         </li>
       <% end %>
     </ul>
+  </div>
+
+  <div class="container">
+    <h1>Wanna try ?</h1>
+
+    <div class="d-flex flex-column flex-lg-row flex-md-row gap-1">
+
+      <%= link_to "https://www.allrecipes.com/search?q=#{@recipe.title}", class: 'btn btn-success rounded-pill w-50' do %>
+        <i class="bi bi-card-checklist"></i>
+        Find the steps
+      <% end %>
+
+      <%= link_to "https://www.carrefour.com", class: 'btn btn-info rounded-pill w-50' do %>
+        <i class="bi bi-bag"></i>
+        Have all you need delivered
+      <% end %>
+
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">Share</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a class="dropdown-item" href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+          <li><a class="dropdown-item" href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+          <li><a class="dropdown-item" href="#"><i class="bi bi-envelope"></i> Mail </a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
