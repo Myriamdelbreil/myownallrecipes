@@ -16,7 +16,6 @@
 class Category < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
-  before_validation :generate_slug, if: :name_changed?
 
 
   validates :name, presence: true

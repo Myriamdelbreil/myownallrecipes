@@ -29,8 +29,6 @@ class Recipe < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  before_validation :generate_slug, if: :title_changed?
-
   belongs_to :category, optional: true
   has_many :recipe_ingredients, dependent: :destroy, inverse_of: :recipe
   has_many :ingredients, through: :recipe_ingredients
