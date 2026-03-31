@@ -2,11 +2,19 @@ class Categories::RecipesController < ApplicationController
   before_action :set_category
 
   def index
-    @recipes = @category.recipes.includes(recipe_ingredients: :ingredient).page(params[:page] || 1)
-    @ingredients_counts_per_recipe =
-      RecipeIngredient.where(recipe_id: @recipes.ids)
-      .group(:recipe_id)
-      .count
+    search_base = RecipeSearchService.new(params).call.where(category: @category)
+
+    case params[:sort]
+    when 'duration'
+      recipes = search_base.order_by_total_prep_time(params[:direction] || :asc)
+    when 'ingredients_count'
+      recipes = search_base.order_by_ingredients_count(params[:direction] || :asc)
+    else
+      recipes = search_base.with_search_score
+    end
+    @recipes_count = recipes.length
+
+    @recipes = recipes.page(params[:page]).per(18)
   end
 
   private
