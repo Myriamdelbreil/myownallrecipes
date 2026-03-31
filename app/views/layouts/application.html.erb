@@ -15,21 +15,30 @@
   </head>
 
   <body>
-    <ul class="list-inline tabs-underlined m-4">
-      <li>
-        <%= link_to "Home", root_path, class: "tab-underlined #{'active' if current_page?(root_path)}"%>
-      </li>
-      <li>
-        <%= link_to "Recipes", recipes_path, class: "tab-underlined #{'active' if current_page?(recipes_path)}"%>
-      </li>
-      <li>
-        <%= link_to "Categories", categories_path, class: "tab-underlined #{'active' if current_page?(categories_path)}"%>
-      </li>
-    </ul>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <%= link_to "Home", root_path, class: "nav-link #{'active' if current_page?(root_path)}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Recipes", recipes_path, class: "nav-link #{'active' if controller_path == 'recipes'}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Categories", categories_path, class: "nav-link #{'active' if controller_path.include?('categories')}" %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
     <%= yield %>
     <hr>
-    <footer class="footer">
-      <div class="footer-links">
+    <footer class="footer flex-column gap-1 flex-lg-row flex-md-row">
+      <div class="footer-links flex-column gap-1 flex-lg-row flex-md-row">
         <a href="#"><i class="fab fa-github"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-facebook"></i></a>

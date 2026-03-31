@@ -9,7 +9,7 @@
     <h2>Or find our most common recipes</h2>
   <% else %>
     <%= render partial: 'pages/search_recipes_form', locals: { query: params[:ingredient_names], count: @recipes_count } %>
-    <div class="d-flex align-items-center gap-2 mb-4 p-3">
+    <div class="d-flex align-items-center gap-2 mb-4 p-3 flex-column gap-1 flex-lg-row flex-md-row">
       <span class="text-muted fw-bold small text-uppercase me-2">Order by :</span>
 
       <%
@@ -55,5 +55,5 @@
     <% end %>
   </div>
 
-  <div class="my-4 d-flex justify-content-center"><%= paginate @recipes %></div>
+  <div class="my-4 d-flex justify-content-center overflow-auto"><%= paginate @recipes, window: 1 %></div>
 </div>
