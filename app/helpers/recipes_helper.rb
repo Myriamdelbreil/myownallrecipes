@@ -24,6 +24,7 @@ module RecipesHelper
     image_tag image_path,
               class: "card-img-top",
               alt: recipe.title,
+              loading: "lazy",
               onerror: "this.error=null;this.src='#{asset_path('generic.jpg')}';"
   end
 end
