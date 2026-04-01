@@ -33,4 +33,11 @@ class Category < ApplicationRecord
       *like_conditions
     )
   }
+
+  scope :order_by_recipe_count, ->(direction = :desc) {
+    left_joins(:recipes)
+      .group(:id)
+      .order(Arel.sql("COUNT(recipes.id) #{direction}"))
+  }
+
 end

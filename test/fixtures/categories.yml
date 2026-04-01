@@ -1,7 +1,9 @@
 breakfast:
   name: Breakfast
   slug: breakfast
+  image_url: null
 
 dessert:
   name: Dessert
   slug: dessert
+  image_url: null
