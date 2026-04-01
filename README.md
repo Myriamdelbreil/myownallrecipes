@@ -92,4 +92,94 @@ For each tool, briefly explain:
 - How you validated and refined any AI-generated code.
 
 Note: While AI can be a valuable assistant, interviewers will assess your ability to understand the entire codebase, explain key technical choices, and effectively answer technical questions about improvements. We expect candidates to use AI as a supportive tool rather than having it generate the complete solution. AI should supplement your coding process, not replace your critical thinking and hands-on development work.
+
+### Choices and stances
+
+## Design Choices
+
+**No recipe instructions stored in the app**
+Rather than storing and displaying full cooking instructions, the app redirects users to the original AllRecipes page. This keeps the database lean and avoids duplicating content that is already well presented on the source site.
+
+---
+
+## User Testing
+
+The app was tested by real users during development. Their feedback was used to refine the user stories and user flow — in particular around the search experience and the clarity of the results page.
+
+---
+
+## Main User Flow
+
+1. The user lands on the **homepage** → they see a search bar and quick-access shortcuts for popular ingredients (chicken, cheese, pasta...)
+
+2. They **type one or more ingredients** in the combobox (autocomplete or free text) → selected ingredients appear as chips
+
+3. They click **"Find and cook"** → they land on the results page with a list of matching recipes
+
+4. They can **sort the results** by preparation time or number of ingredients to refine their choice
+
+5. They click on a **recipe** → they see the prep time, cook time, and full ingredient list with quantities
+
+6. They decide what to do next:
+   - **"Find the steps"** → redirected to AllRecipes for the full recipe instructions
+   - **"Have all you need delivered"** → redirected to Carrefour to order any missing ingredients
+   - **"Share"** → share on Instagram, Facebook, Twitter or by email
+
+---
+
+## User Stories
+
+**User Story 1 — Search recipes by ingredients**
+
+As a user who wants to cook dinner without going to the store, I want to enter the ingredients I already have at home in a search bar, so that I get a list of recipes I can actually make right now.
+
+- I can type or select one or multiple ingredients from a combobox
+- I can add free text if my ingredient isn't in the list
+- Each selected ingredient appears as a chip I can remove
+- Results update to show only recipes that match my ingredients
+- If no exact match is found, the app falls back to recipes using common base ingredients
+
+---
+
+**User Story 2 — Sort and refine results**
+
+As a user browsing search results, I want to sort recipes by preparation time or number of ingredients, so that I can find something quick or something simple depending on my situation.
+
+- I can sort by total prep time (ascending or descending)
+- I can sort by number of ingredients (ascending or descending)
+- The active sort is visually highlighted
+- Sorting preserves my current ingredient search
+
+---
+
+**User Story 3 — View a recipe and take action**
+
+As a user who found a recipe I like, I want to see its details and decide what to do next, so that I can either start cooking or get the missing ingredients delivered.
+
+- I can see the prep time, cook time, and full ingredient list with quantities
+- I can click a link to find the full cooking steps on AllRecipes
+- I can click a link to get missing ingredients delivered via Carrefour
+- I can share the recipe on social media or by email
+
+---
+
+
+## AI Usage
+
+AI coding assistants were used throughout the project — for debugging, writing and structuring the README, refactoring, setting up CI, writing tests, and reviewing user stories. All suggested code changes were reviewed in the diff before being accepted and tested manually in the browser.
+
+**Le Wagon UI component library**
+
+- Used for UI components and styling conventions throughout the app
+
+## Known issues
+
+**Chip removal doesn't update search**
+
+When returning to the search results page, previously selected ingredients are pre-filled in the combobox (chips displayed). However, removing a chip and re-submitting the form still sends the deleted ingredient in the request.
+
+**Root cause:** `hw_combobox_tag` with `value:` pre-populates the hidden input, but chip removal doesn't update it in hotwire_combobox v0.4.1.
+
+**To investigate:** upgrade `hotwire_combobox` or find a JS workaround to sync the hidden input on chip removal.
+
 </details>
