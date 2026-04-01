@@ -172,6 +172,25 @@ AI coding assistants were used throughout the project — for debugging, writing
 
 - Used for UI components and styling conventions throughout the app
 
+## What was added beyond the core requirements
+
+**Error monitoring with Sentry**
+
+Sentry was integrated to track and report runtime errors in production. This allows catching unexpected exceptions with full context (stack trace, user flow, environment) without needing to reproduce them locally.
+
+---
+
+**Recipe image handling (not merged — Render shell limitation)**
+
+Work was done to fetch and store recipe images from AllRecipes with ActiveStorage and Cloudinary. However, it means running a huge migration requiring a lot of memory on the app in production.
+Thus it has been chosen not to run this in production at the moment.
+
+---
+
+**GitHub Actions**
+Work was done to setup a CI workflow to run tests on the app. Wasn't merged at the moment.
+---
+
 ## Known issues
 
 **Chip removal doesn't update search**
