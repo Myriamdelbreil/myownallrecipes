@@ -2,11 +2,11 @@
 
 
 <div class="container">
-  <% if @recipes.empty? %>
+  <% if @recipes_count.zero? %>
     <h1>Sorry, we didn't find anything...</h1>
     <h2>Search again?</h2>
     <%= render('pages/search_recipes_form')%>
-    <h2>Or find our most common recipes</h2>
+    <h2 class='my-4'>Or find our most common recipes</h2>
   <% else %>
     <%= render partial: 'pages/search_recipes_form', locals: { query: params[:ingredient_names], count: @recipes_count } %>
     <div class="d-flex align-items-center gap-2 mb-4 p-3 flex-column gap-1 flex-lg-row flex-md-row">

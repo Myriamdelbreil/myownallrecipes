@@ -4,10 +4,14 @@ class RecipeSearchService
   end
 
   def call
-    return Recipe.all if @query.blank?
+    return { recipes: Recipe.all, recipes_found: true } if @query.blank?
 
     recipes = find_recipes
-    recipes.exists? ? recipes : fallback_to_basic_ingredients
+    if recipes.exists?
+      { recipes:, recipes_found: true }
+    else
+      { recipes: fallback_to_basic_ingredients, recipes_found: false }
+    end
   end
 
   private
@@ -24,5 +28,6 @@ class RecipeSearchService
     Recipe.joins(:recipe_ingredients)
           .where(recipe_ingredients: { ingredient_id: basic_ids })
           .group("recipes.id")
+          .limit(18)
   end
 end
