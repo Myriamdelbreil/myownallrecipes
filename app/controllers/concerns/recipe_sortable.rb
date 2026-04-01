@@ -1,8 +1,8 @@
 module RecipeSortable
   private
 
-  def apply_sort_and_paginate(search_base)
-    recipes = search_base[:recipes]
+  def apply_sort_and_paginate(search_base, category: nil)
+    recipes = category.presence ? search_base[:recipes].where(category:) : search_base[:recipes]
     recipes = case params[:sort]
               when 'duration'
                 recipes.order_by_total_prep_time(safe_direction)
