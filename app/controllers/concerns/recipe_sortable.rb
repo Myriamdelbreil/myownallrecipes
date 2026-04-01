@@ -11,7 +11,7 @@ module RecipeSortable
                 search_base.with_search_score
               end
 
-    @recipes_count = recipes.length
     @recipes = recipes.page(params[:page]).per(18)
+    @recipes_count = @recipes.total_count
   end
 end
