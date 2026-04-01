@@ -86,3 +86,6 @@ group :test do
 end
 
 gem "hotwire_combobox"
+
+gem "sentry-ruby"
+gem "sentry-rails"
