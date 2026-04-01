@@ -28,12 +28,15 @@ class RecipeImporterService
 
   def import_categories_for_batch(batch)
     names = batch.pluck('category').uniq.compact_blank
+    image_by_category = batch.each_with_object({}) do |recipe, hash|
+      name = recipe['category']
+      hash[name] ||= clean_image_url(recipe['image']) if name.present?
+    end
     categories_to_import = names.map do |name|
-      Category.new(name: name, slug: "#{name.parameterize}-#{rand(10000)}")
+      Category.new(name: name, slug: "#{name.parameterize}-#{rand(10000)}", image_url: image_by_category[name])
     end
     Category.import(categories_to_import, on_duplicate_key_ignore: true, validate: false)
     Category.where(name: names).index_by(&:name)
-
   end
 
   def import_ingredients_for_batch(batch)
