@@ -13,12 +13,10 @@ class RecipeSearchService
   private
 
   def find_recipes
-    name_ids = Recipe.search_by_name(@query).pluck(:id)
-    ingredient_ids = Recipe.search_by_ingredients_names(@query).pluck(:id)
+    name_ids = Recipe.search_by_name(@query).select("recipes.id")
+    ingredient_ids = Recipe.search_by_ingredients_names(@query).select("recipes.id")
 
-    all_ids = (name_ids + ingredient_ids).uniq
-
-    Recipe.where(id: all_ids)
+    Recipe.where(id: name_ids).or(Recipe.where(id: ingredient_ids))
   end
 
   def fallback_to_basic_ingredients
