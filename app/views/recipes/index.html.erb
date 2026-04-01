@@ -30,7 +30,7 @@
         🍎 Number of ingredients <%= ing_icon %>
       <% end %>
 
-      <%= link_to "Reset", recipes_path, class: "btn btn-light rounded-pill text-muted text-decoration-none" %>
+      <%= link_to "Reset", recipes_path(ingredient_names: params[:ingredient_names]), class: "btn btn-light rounded-pill text-muted text-decoration-none" %>
     </div>
   <% end %>
 
