@@ -10,6 +10,7 @@
           multiple: true,
           multiselect_chip_src: chip_ingredients_path,
           free_text: true,
+          value: local_assigns.fetch(:query, nil),
           input: {
             class: "form-control col-6",
             placeholder: "Enter what's left in your kitchen"
