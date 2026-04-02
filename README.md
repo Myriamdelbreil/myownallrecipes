@@ -95,7 +95,9 @@ Note: While AI can be a valuable assistant, interviewers will assess your abilit
 
 </details>
 
-### Choices and stances
+--- 
+
+# Choices and stances
 
 ## Design Choices
 
@@ -190,7 +192,9 @@ Thus it has been chosen not to run this in production at the moment.
 ---
 
 **GitHub Actions**
+
 Work was done to setup a CI workflow to run tests on the app. Wasn't merged at the moment.
+
 ---
 
 ## Known issues
