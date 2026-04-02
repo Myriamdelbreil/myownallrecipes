@@ -93,6 +93,8 @@ For each tool, briefly explain:
 
 Note: While AI can be a valuable assistant, interviewers will assess your ability to understand the entire codebase, explain key technical choices, and effectively answer technical questions about improvements. We expect candidates to use AI as a supportive tool rather than having it generate the complete solution. AI should supplement your coding process, not replace your critical thinking and hands-on development work.
 
+</details>
+
 ### Choices and stances
 
 ## Design Choices
@@ -200,4 +202,3 @@ When returning to the search results page, previously selected ingredients are p
 **Root cause:** `hw_combobox_tag` with `value:` pre-populates the hidden input, but chip removal doesn't update it in hotwire_combobox v0.4.1.
 
 **To investigate:** upgrade `hotwire_combobox` or find a JS workaround to sync the hidden input on chip removal.
-</details>
