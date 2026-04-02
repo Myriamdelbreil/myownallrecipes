@@ -200,5 +200,4 @@ When returning to the search results page, previously selected ingredients are p
 **Root cause:** `hw_combobox_tag` with `value:` pre-populates the hidden input, but chip removal doesn't update it in hotwire_combobox v0.4.1.
 
 **To investigate:** upgrade `hotwire_combobox` or find a JS workaround to sync the hidden input on chip removal.
-
 </details>
