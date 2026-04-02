@@ -135,14 +135,12 @@
   }
 }
 
-// Titre de la section
 .section-title {
   font-size: 1.4rem;
   font-weight: 800;
   color: #222;
 }
 
-// Chaque ligne d'ingrédient
 .ingredient-card {
   background-color: #fff;
   border-radius: 20px;
@@ -154,10 +152,4 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.06);
   }
-
-  // Le petit carré gris pour l'icône
-
-  // .ingredient-info {
-  //   font-size: 1.05rem;
-  // }
 }
