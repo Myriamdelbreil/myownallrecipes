@@ -97,6 +97,9 @@ Note: While AI can be a valuable assistant, interviewers will assess your abilit
 
 --- 
 
+# The app
+Click here -> <a href='https://myriamsrecipesforpennylane.onrender.com/'>Recipes for Pennylane </a>
+
 # Choices and stances
 
 ## Design Choices
@@ -197,7 +200,7 @@ Work was done to setup a CI workflow to run tests on the app. Wasn't merged at t
 
 ---
 
-## Known issues
+## Known issues and things to improve
 
 **Chip removal doesn't update search**
 
@@ -206,3 +209,18 @@ When returning to the search results page, previously selected ingredients are p
 **Root cause:** `hw_combobox_tag` with `value:` pre-populates the hidden input, but chip removal doesn't update it in hotwire_combobox v0.4.1.
 
 **To investigate:** upgrade `hotwire_combobox` or find a JS workaround to sync the hidden input on chip removal.
+
+**Compliance**
+- Add Terms of Service page in footer
+- Implement a gem that handles cookies
+
+**Errors management**
+- Customize error pages (50X, 40X, ...)
+- Handle basic errors and study when they should be handled
+
+**App performance**
+- Run migration and adapt code to handle images related to recipes or categories
+- Display a loader after submitting a request
+
+**UX/UI**
+- On a mobile phone, i want to be able to go back to the top of the page quickly OR I want to have the searchbar when I scroll fixed on the top
