@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_04_01_151001) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_10_081643) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -48,6 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_01_151001) do
     t.datetime "updated_at", null: false
     t.string "slug", null: false
     t.string "image_url"
+    t.index "lower((name)::text) gin_trgm_ops", name: "index_categories_on_lower_name_trgm", using: :gin
     t.index ["name"], name: "index_categories_on_name", unique: true
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
@@ -56,6 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_01_151001) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "lower((name)::text) gin_trgm_ops", name: "index_ingredients_on_lower_name_trgm", using: :gin
+    t.index "to_tsvector('simple'::regconfig, (name)::text)", name: "index_ingredients_on_name_tsearch", using: :gin
     t.index ["name"], name: "index_ingredients_on_name", unique: true
   end
 
@@ -82,6 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_01_151001) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug", null: false
+    t.index "to_tsvector('simple'::regconfig, (title)::text)", name: "index_recipes_on_title_tsearch", using: :gin
     t.index ["category_id"], name: "index_recipes_on_category_id"
     t.index ["slug"], name: "index_recipes_on_slug", unique: true
     t.check_constraint "cook_time >= 0", name: "check_cook_time_non_negative"

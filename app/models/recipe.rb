@@ -61,9 +61,10 @@ class Recipe < ApplicationRecord
       .order(Arel.sql("ingredients_count #{direction}"))
   }
 
+  # matches GIN index built with to_tsvector('simple', title)
   pg_search_scope :search_by_name,
     against: :title,
-    using: { tsearch: { any_word: false, prefix: true } }
+    using: { tsearch: { any_word: false, prefix: true, dictionary: 'simple' } } # 'simple' = no language-specific processing, just lowercase
 
   scope :search_by_ingredients_names, ->(query) {
     return Recipe.none if query.blank?
