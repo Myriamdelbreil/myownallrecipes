@@ -68,13 +68,13 @@ class Recipe < ApplicationRecord
 
   scope :search_by_ingredients_names, ->(query) {
     return Recipe.none if query.blank?
-    words = query.downcase.split(/[\s,]+/).reject(&:blank?)
+    words = query.split(/[\s,]+/).reject(&:blank?)
     like_conditions = words.map { "%#{_1}%" }
 
     joins(:ingredients)
-      .where(words.map { "lower(ingredients.name) LIKE ?" }.join(" OR "), *like_conditions)
+      .where(words.map { "ingredients.name ILIKE ?" }.join(" OR "), *like_conditions)
       .group("recipes.id")
-      .having("COUNT(DISTINCT CASE #{words.each_with_index.map { |_, i| "WHEN lower(ingredients.name) LIKE ? THEN #{i}" }.join(" ")} END) = ?", *like_conditions, words.length)
+      .having("COUNT(DISTINCT CASE #{words.each_with_index.map { |_, i| "WHEN ingredients.name ILIKE ? THEN #{i}" }.join(" ")} END) = ?", *like_conditions, words.length)
   }
 
   def total_prep_time
