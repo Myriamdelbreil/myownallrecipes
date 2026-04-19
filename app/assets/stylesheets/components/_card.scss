@@ -141,6 +141,10 @@
   color: #222;
 }
 
+.checked-items .ingredient-name {
+  text-decoration: line-through !important;
+}
+
 .ingredient-card {
   background-color: #fff;
   border-radius: 20px;
